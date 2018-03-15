@@ -91,6 +91,25 @@ public class rateApp extends AppCompatActivity implements RatingDialogListener {
 
     }
     public void getRatingFood(String foodId){
-        
+        com.google.firebase.database.Query foodRating= ratingTbl.orderByChild("foodId").equalTo(foodId);
+        foodRating.addValueEventListener(new ValueEventListener() {
+
+            int count=0,sum=0;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot:dataSnapshot.getChildren()){
+                    Rating item=postSnapshot.getValue(Rating.class);
+                    sum+=Integer.parseInt(item.getRateValue());
+                    count++;
+                }
+                float average=sum/count;
+                ratingBar.setRating(average);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
