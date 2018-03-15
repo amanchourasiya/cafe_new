@@ -37,7 +37,8 @@
         <activity android:name=".new_sign_up" />
         <activity android:name=".food_list" />
         <activity android:name=".FoodDetail" />
-        <activity android:name=".Cart"></activity>
+        <activity android:name=".Cart" />
+        <activity android:name=".rateApp"></activity>
     </application>
 
 </manifest>

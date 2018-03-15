@@ -23,6 +23,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
+    compile 'com.stepstone.apprating:app-rating:2.0.0'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     compile 'com.cepheuen.elegant-number-button:lib:1.0.2'
