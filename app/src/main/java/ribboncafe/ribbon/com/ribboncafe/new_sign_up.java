@@ -77,30 +77,11 @@ public class new_sign_up extends AppCompatActivity {
                 {
                     //Toast.makeText(new_sign_up.this,"Successfully Registered", Toast.LENGTH_LONG).show();
 
-                    final FirebaseUser user = firebaseauth.getCurrentUser();
-                    System.out.println("User is "+user);
-//                    user.sendEmailVerification()
-//                            .addOnCompleteListener(new_sign_up.this, new OnCompleteListener() {
-//                                @Override
-//                                public void onComplete(@NonNull Task task) {
-//                                    System.out.println("send mail called completed");
-//
-//                                    if (task.isSuccessful()) {
-//                                        Toast.makeText(new_sign_up.this,
-//                                                "Verification email sent to " + user.getEmail(),
-//                                                Toast.LENGTH_SHORT).show();
-//                                        System.out.println("Email sent successfully");
-//                                    } else {
-//                                        System.out.println("Email not sent");
-//                                            Toast.makeText(new_sign_up.this,
-//                                                "Failed to send verification email.",
-//                                                Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
 
-                    Intent change_activity=new Intent(new_sign_up.this,new_sign_in.class);
-                    new_sign_up.this.startActivity(change_activity);
+                   sendVerificationEmail();
+
+                //    Intent change_activity=new Intent(new_sign_up.this,new_sign_in.class);
+                //    new_sign_up.this.startActivity(change_activity);
 
                 }
                 else
@@ -111,6 +92,40 @@ public class new_sign_up extends AppCompatActivity {
                 progress.dismiss();
             }
         });
+    }
+
+    private void sendVerificationEmail(){
+        System.out.println("sendVerification called\n\n\n");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // email sent
+                            Toast.makeText(new_sign_up.this,"Email sent Successfully", Toast.LENGTH_LONG).show();
+                            System.out.println("Sent successfully\n\n\n");
+                            // after email is sent just logout the user and finish this activity
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(new_sign_up.this, new_food_startup.class));
+                            finish();
+                        }
+                        else
+                        {
+                            // email not sent, so display message and restart the activity or do whatever you wish to do
+
+                            //restart this activity
+                            System.out.println("Sent unsuccessfully\n\n\n");
+                            overridePendingTransition(0, 0);
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+
+                        }
+                    }
+                });
+        System.out.println("sendVerification Finished\n\n\n");
     }
 
 
