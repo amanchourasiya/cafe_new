@@ -101,12 +101,17 @@
                         android:orientation="horizontal"
                         android:id="@+id/layout_price"
                         >
-                        
-                        <ImageView
+
+                        <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/food_price_curr"
+                            android:text="Rs"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
                             android:layout_weight="1"
-                            android:src="@drawable/ic_attach_money_black_24dp"
+                            android:layout_marginLeft="8dp"
                             />
                         <TextView
                             android:layout_width="0dp"

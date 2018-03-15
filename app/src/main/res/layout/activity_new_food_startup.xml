@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#FFFFFF"
-            android:text="Order from Desk, Rate your snacks and get todays snacks notification"
+            android:text="Ribbon Special"
             android:textStyle="italic"
             android:id="@+id/txt_about"
             />
