@@ -179,7 +179,7 @@ public class nav_drawer extends AppCompatActivity
         } else if(id == R.id.nav_logout){
 
             auth.signOut();
-            startActivity(new Intent(nav_drawer.this, MainActivity.class));
+            startActivity(new Intent(nav_drawer.this, new_food_startup.class));
             finish();
 
 

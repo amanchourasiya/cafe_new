@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class new_sign_up extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class new_sign_up extends AppCompatActivity {
     private EditText password;
     private ProgressDialog progress;
     private FirebaseAuth firebaseauth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +70,35 @@ public class new_sign_up extends AppCompatActivity {
 
 
 
-        firebaseauth.createUserWithEmailAndPassword(user,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseauth.createUserWithEmailAndPassword(user,pass).addOnCompleteListener(new_sign_up.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    Toast.makeText(new_sign_up.this,"Successfully Registered", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(new_sign_up.this,"Successfully Registered", Toast.LENGTH_LONG).show();
+
+                    final FirebaseUser user = firebaseauth.getCurrentUser();
+                    System.out.println("User is "+user);
+//                    user.sendEmailVerification()
+//                            .addOnCompleteListener(new_sign_up.this, new OnCompleteListener() {
+//                                @Override
+//                                public void onComplete(@NonNull Task task) {
+//                                    System.out.println("send mail called completed");
+//
+//                                    if (task.isSuccessful()) {
+//                                        Toast.makeText(new_sign_up.this,
+//                                                "Verification email sent to " + user.getEmail(),
+//                                                Toast.LENGTH_SHORT).show();
+//                                        System.out.println("Email sent successfully");
+//                                    } else {
+//                                        System.out.println("Email not sent");
+//                                            Toast.makeText(new_sign_up.this,
+//                                                "Failed to send verification email.",
+//                                                Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                            });
+
                     Intent change_activity=new Intent(new_sign_up.this,new_sign_in.class);
                     new_sign_up.this.startActivity(change_activity);
 
